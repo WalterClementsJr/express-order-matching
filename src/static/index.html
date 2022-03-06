@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+    <title>Trading</title>
+</head>
+<body>
+<div class="container default mt-5">
+    <form id="main">
+        <div class="row mb-4 me-auto">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="fs-5" for="orderType">Loại lệnh</label>
+                    <select class="form-select" id="orderType" name="orderType" aria-label="Default select example">
+                        <option selected value="default">Lệnh thông thường</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="fs-5" for="tradeOption">Mua/Bán</label>
+                    <select class="form-select" id="tradeOption" name="tradeOption" onchange="document.getElementById('action').innerText=this.value==='buy'?'Mua':'Bán'">
+                        <option selected value="buy">Mua</option>
+                        <option value="sell">Bán</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4 me-auto">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="fs-5" for="stockName">Mã CK</label>
+                    <input type="text" id="stockName" name="stockName" class="form-control" placeholder="ACB">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="fs-5" for="orderType1">Lệnh</label>
+                    <select class="form-select" id="orderType1" name="orderType1">
+                        <option selected value="LO">LO</option>
+                        <option value="ATC">ATC</option>
+                        <option value="ATO">ATO</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4 me-auto">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="fs-5" for="amount">Số lượng</label>
+                    <input type="number" class="form-control" id="amount">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="fs-5" for="maxAmount">Số lượng max</label>
+                    <input type="number" class="form-control" id="maxAmount">
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4 me-auto">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="fs-5" for="price">Giá</label>
+                    <input type="number" class="form-control" id="price">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" onchange="document.getElementById('multiplier').disabled = !this.checked;">
+                    <label class="fs-5" for="multiplier">Nhân lệnh</label>
+                    <input type="number" class="form-control" contenteditable="false" id="multiplier" value="1" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4 me-auto">
+            <div class="col-md-4">
+                <button id="action" type="submit" class="btn btn-primary">OK</button>
+                <button type="reset" class="btn btn-secondary">Làm lại</button>
+            </div>
+        </div>
+    </form>
+    <div class="row mb-4 me-auto">
+        <div class="col-md-4 fs-4">
+            Trạng thái tiểu khoản: <span class="font-monospace">Bình thường</span>
+        </div>
+    </div>
+</div>
+
+</body>
+<!--<script type="module" src="/static/js/index.js"></script>-->
+<script>
+    document.getElementById('action').innerText = document.getElementById('tradeOption').value==='buy' ? 'Mua' : 'Bán';
+</script>
+</html>
