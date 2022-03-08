@@ -21,8 +21,7 @@ const sqlConfig = {
     }
 }
 
-app.use("/css", express.static(path.resolve(__dirname, "src", "static", "css")));
-app.use("/js", express.static(path.resolve(__dirname, "src", "static", "js")));
+app.use("/res", express.static(path.resolve(__dirname, "src", "static")));
 
 app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname,"src", "static", "index.html"));

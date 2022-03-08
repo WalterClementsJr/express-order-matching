@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/res/img/stock.ico">
+    <link rel="stylesheet" type="text/css" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/res/css/font-awesome.min.css">
     <title>Trading</title>
 </head>
 <body>
@@ -34,7 +35,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="fs-5" for="stockName">Mã CK</label>
-                    <input type="text" id="stockName" name="stockName" class="form-control" placeholder="ACB">
+                    <input type="text" id="stockName" name="stockName" class="form-control" placeholder="ACB" autocapitalize="characters" style="text-transform:uppercase" required>
                 </div>
             </div>
             <div class="col-md-3">
@@ -86,13 +87,10 @@
     </form>
     <div class="row mb-4 me-auto">
         <div class="col-md-4 fs-4">
-            Trạng thái tiểu khoản: <span class="font-monospace">Bình thường</span>
+            Trạng thái tiểu khoản: <span class="font-monospace" id="accStatus">Bình thường</span>
         </div>
     </div>
 </div>
-
 </body>
-<script type="text/javascript" src="/js/script.js"></script>
-<script>
-</script>
+<script type="text/javascript" src="/res/js/script.js"></script>
 </html>
