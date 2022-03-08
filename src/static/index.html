@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
     <title>Trading</title>
 </head>
 <body>
 <div class="container default mt-5">
-    <form id="main">
+    <form id="bidForm" action="/bid/" method="post">
         <div class="row mb-4 me-auto">
             <div class="col-md-3">
                 <div class="form-group">
@@ -52,13 +52,13 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="fs-5" for="amount">Số lượng</label>
-                    <input type="number" class="form-control" id="amount">
+                    <input type="number" class="form-control" id="amount" required>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="fs-5" for="maxAmount">Số lượng max</label>
-                    <input type="number" class="form-control" id="maxAmount">
+                    <input type="number" class="form-control" id="maxAmount" required>
                 </div>
             </div>
         </div>
@@ -66,12 +66,12 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="fs-5" for="price">Giá</label>
-                    <input type="number" class="form-control" id="price">
+                    <input type="number" class="form-control" id="price" required>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" onchange="document.getElementById('multiplier').disabled = !this.checked;">
+                    <input class="form-check-input" type="checkbox" id="enableMultiplier" onchange="document.getElementById('multiplier').disabled = !this.checked;">
                     <label class="fs-5" for="multiplier">Nhân lệnh</label>
                     <input type="number" class="form-control" contenteditable="false" id="multiplier" value="1" disabled>
                 </div>

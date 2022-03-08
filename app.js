@@ -1,29 +1,30 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const config = require('config');
+
+const {body, check, validationResult} = require("express-validator");
 
 const sql = require('mssql')
 const sqlConfig = {
     user: "sa",
     password: "123",
     database: "PriceDatabase",
-    server: 'localhost',
+    server: 'localhost\\MSSQLSERVER',
     pool: {
         max: 10,
         min: 0,
         idleTimeoutMillis: 30000
     },
     options: {
-        encrypt: false, // for azure
-        trustServerCertificate: true // change to true for local dev / self-signed certs
+        encrypt: false,
+        trustServerCertificate: true
     }
 }
 
-app.use("/static", express.static(path.resolve(__dirname, "src", "static")));
+app.use("/css", express.static(path.resolve(__dirname, "src", "static", "css")));
 
 app.get("/*", (req, res) => {
-    res.sendFile(path.resolve(__dirname,"src", "index.html"));
+    res.sendFile(path.resolve(__dirname,"src", "static", "index.html"));
 });
 
 sql.connect(sqlConfig, function (err) {
