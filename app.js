@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-
+const bodyParser = require('body-parser');
 const {body, check, validationResult} = require("express-validator");
 
 const sql = require('mssql')
@@ -21,10 +21,14 @@ const sqlConfig = {
     }
 }
 
+app.set('views', path.resolve(__dirname, "src", "views"));
+app.set('view engine', 'ejs');
+
 app.use("/res", express.static(path.resolve(__dirname, "src", "static")));
 
 app.get("/*", (req, res) => {
-    res.sendFile(path.resolve(__dirname,"src", "static", "index.html"));
+    // res.sendFile(path.resolve(__dirname, "src", "static", "index.html"));
+    res.render('index');
 });
 
 sql.connect(sqlConfig, function (err) {
@@ -38,10 +42,30 @@ sql.connect(sqlConfig, function (err) {
     request.query('SELECT id, name, price FROM dbo.tbl_price', function (err, recordset) {
         if (err) console.log(err)
 
-        // send records as a response
-        // res.send(recordset);
-        console.log(recordset);
-    });
-});
+
+app.post(
+    '/bid',
+    body('amount', 'Số lượng Không hợp lệ')
+        .isInt({min: 1}),
+    body('maxAmount')
+        .isInt({min: 1, max: 4000}).bail()
+        .custom((value, {req}) => {
+            if (value < body('amount').value) {
+                throw new Error('Số lượng tối đa không được bé hơn số lượng!');
+            }
+            return true;
+        }),
+    (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            // return res.status(400).json({errors: errors.array()});
+            const alert = errors.array()
+            res.render('', {
+                alert
+            })
+        }
+    },
+);
+
 
 app.listen(3000, () => console.log('Server is listening on port 3000'));
