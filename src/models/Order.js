@@ -1,5 +1,6 @@
-const { Sequelize, DataTypes, Model } = require('@sequelize/core');
-const sequelize = new Sequelize('mssql');
+const sequelize = require("../configs/sequelize.config");
+const { Sequelize, DataTypes, Model } = require('sequelize');
+
 class Order extends Model {}
 
 Order.init({
@@ -13,7 +14,7 @@ Order.init({
         allowNull: false
     },
     ngayDat: {
-        type: DataTypes.DATETIME,
+        type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
     },
     loaiGD: {
@@ -24,18 +25,23 @@ Order.init({
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    gia: {
+    giaDat: {
         type: DataTypes.DOUBLE(20, 4),
         allowNull: false
     },
     trangThaiLenh: {
         type: DataTypes.STRING,
         defaultValue: 'CHO_KHOP'
-    },
+    }
 }, {
     sequelize, // We need to pass the connection instance
-    modelName: 'Order' // We need to choose the model name
+    modelName: 'Order', // We need to choose the model name
+    tableName: 'LENHDAT',
+    createdAt: false,
+    updatedAt: false,
 });
 
 // the defined model is the class itself
-console.log(Order === sequelize.models.Order); // true
+// console.log(Order === sequelize.models.Order); // true
+
+module.exports = Order;
