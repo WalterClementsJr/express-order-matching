@@ -1,12 +1,14 @@
-const tradeOption = document.getElementById('tradeOption');
 const actionBtn = document.getElementById('action');
-const checkMultiplier = document.getElementById('enableMultiplier');
+let current = document.forms.order.elements.tradeOption;
+let prev;
 
-actionBtn.innerText = tradeOption.value === 'buy' ? 'Mua' : 'Bán';
+function listener() {
+    prev = this;
+    actionBtn.textContent = this.value === 'buy' ? 'Mua' : 'Bán';
+}
 
-tradeOption.addEventListener('change', function () {
-    actionBtn.innerText = this.value === 'buy' ? 'Mua' : 'Bán';
-});
-checkMultiplier.addEventListener('change', function () {
-    document.getElementById('multiplier').disabled = !this.checked
-});
+actionBtn.textContent = current[0].checked ? 'Mua' : 'Bán';
+
+for(let i = 0; i < current.length; i++) {
+    current[i].addEventListener('click', listener);
+}

@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-
 const {body, check, validationResult} = require("express-validator");
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 let config = require('../configs/db.config').DB_CONFIG;
 
@@ -29,6 +32,8 @@ router.post('/order',
             res.render('order', {
                 alert
             });
+        } else {
+
         }
     }
 );
