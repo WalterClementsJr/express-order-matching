@@ -13,4 +13,5 @@ app.use("/res", express.static(path.resolve(__dirname, "src", "public")));
 app.use(require('./src/routes/index'));
 app.use(require('./src/routes/order'));
 
+// route(app);
 app.listen(3000, () => console.log('Server is running on localhost:3000/'));
