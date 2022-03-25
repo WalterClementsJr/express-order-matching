@@ -1,25 +1,28 @@
 const sequelize = require("../configs/sequelize.config");
-const { Sequelize, DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 
 class Order extends Model {}
 
 Order.init({
-    id: {
+    orderId: {
+        field: 'ld_id',
         type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+        allowNull: true
     },
     macp: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    ngayDat: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+    orderDate: {
+        field: 'ngayDat',
+        type: DataTypes.DATE
     },
     loaiGD: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    loaiLenh: {
+        type: DataTypes.STRING
     },
     soLuong: {
         type: DataTypes.INTEGER,
@@ -30,18 +33,15 @@ Order.init({
         allowNull: false
     },
     trangThaiLenh: {
-        type: DataTypes.STRING,
-        defaultValue: 'CHO_KHOP'
+        type: DataTypes.STRING
     }
 }, {
-    sequelize, // We need to pass the connection instance
-    modelName: 'Order', // We need to choose the model name
+    sequelize,
+    modelName: 'Order',
     tableName: 'LENHDAT',
     createdAt: false,
-    updatedAt: false,
+    updatedAt: false
 });
-
-// the defined model is the class itself
-// console.log(Order === sequelize.models.Order); // true
+Order.removeAttribute('id');
 
 module.exports = Order;

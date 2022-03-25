@@ -1,28 +1,26 @@
 const sequelize = require("../src/configs/sequelize.config");
-const TEDIOUS_CONFIG = require("../src/configs/tedious.config");
-const Connection = require('tedious').Connection;
 const Order = require('../src/models/Order');
 
+// Order.findAll()
+//     .then(orders => console.table(JSON.stringify(orders)))
+//     .catch(err => console.log("error" + err)
+//     );
 
-// let connection = new Connection(TEDIOUS_CONFIG);
-// connection.on('connect', function(err) {
-//     if(err) {
-//         console.log('Error: ', err)
-//     }
-//     console.log("CONNECTED TO DB");
-// });
+let order = Order.build(
+    {
+        macp: "ACA",
+        loaiGD: "M",
+        giaDat: 2000,
+        soLuong: 200,
+    }
+);
 
-Order.findAll()
-    .then(orders => console.log(JSON.stringify(orders)))
-    .catch(err => console.log("error" + err)
-    );
+order.save().then(function(item){
+    console.log("INSERT OK");
+    console.log(order.toJSON());
+}).catch(function (err) {
+    // handle error;
+    console.log('test error');
+    console.log(err);
+});
 
-// sequelize
-//     .authenticate()
-//     .then(() => {
-//         console.log('SQLize Connection has been established successfully.');
-//
-//     })
-//     .catch(err => {
-//         console.error('SQLize Unable to connect to the database:', err);
-//     });
