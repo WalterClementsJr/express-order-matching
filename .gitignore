@@ -1,6 +1,16 @@
+# intellij
+.idea
+
+# VSCode
+.vscode/
+
 # Node
 node_modules/*
 package-lock.json
 
-# intellij
-.idea
+# CSharp
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
