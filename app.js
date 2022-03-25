@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 const indexRouter = require("./src/routes/index");
 const orderRouter = require("./src/routes/order");
+const notifyRouter = require("./src/routes/notifier");
 
 // set view engine to ejs
 app.set('views', path.resolve(__dirname, "src", "views"));
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 // routing
+app.use('/notify', notifyRouter);
 app.use('/order', orderRouter);
 app.use('/', indexRouter);
 
