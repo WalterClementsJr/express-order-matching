@@ -1,12 +1,13 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net;
 
 namespace SqlDependencyInjector
 {
     class Program
     {
-        static string connectionString = @"Data Source=MSI;initial catalog=PriceDatabase;integrated security=True;User ID=sa;Password=123";
+        static string connectionString = @"Data Source=MSI;initial catalog=CHUNGKHOAN;integrated security=True;User ID=sa;Password=123";
         private static readonly HttpClient client = new HttpClient();
 
         static void Main(string[] args)
@@ -25,7 +26,7 @@ namespace SqlDependencyInjector
         static DataTable getDataWithSqlDependency()
         {
             using (var connection = new SqlConnection(connectionString))
-            using (var cmd = new SqlCommand("SELECT id, name, price FROM dbo.tbl_price", connection))
+            using (var cmd = new SqlCommand("SELECT idkhop, ngaykhop, soluongkhop, giakhop FROM dbo.LENHKHOP", connection))
             {
                 var dt = new DataTable();
 
@@ -42,28 +43,40 @@ namespace SqlDependencyInjector
         }
 
         // Handler method
-        static void onDependencyChange(object sender,
-           SqlNotificationEventArgs e)
+        static void onDependencyChange(object sender, SqlNotificationEventArgs args)
         {
+            Console.WriteLine($"SqlNotificationEventArgs: Info={args.Info}, Source={args.Source}, Type={args.Type}.");
 
-            Console.WriteLine($"OnChange Event fired. SqlNotificationEventArgs: Info={e.Info}, Source={e.Source}, Type={e.Type}.");
-
-            if ((e.Info != SqlNotificationInfo.Invalid)
-                && (e.Type != SqlNotificationType.Subscribe))
+            if ((args.Info != SqlNotificationInfo.Invalid)
+                && (args.Type != SqlNotificationType.Subscribe))
             {
-                //resubscribe
+                // resubscribe
                 var dt = getDataWithSqlDependency();
                 Console.WriteLine("Data changed.");
-                // var responseString = await client.GetStringAsync("http://localhost:3000");
-                // Console.WriteLine($"Response: {responseString}");
+
+                _ = notifyServer();
             }
             else
             {
                 Console.WriteLine("SqlDependency not restarted");
             }
-
         }
 
-
+        static async Task notifyServer()
+        {
+            try
+            {
+                var responseString = await client.GetStringAsync("http://localhost:3000/notify");
+                Console.WriteLine($"Response: {responseString}");
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Http Request Exception caught: {0}", ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught: {0}", ex);
+            }
+        }
     }
 }
