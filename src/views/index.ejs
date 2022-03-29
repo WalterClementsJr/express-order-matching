@@ -7,12 +7,46 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/res/img/fav.ico">
     <link rel="stylesheet" type="text/css" href="/res/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/res/css/font-awesome.min.css">
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
     <title>Home</title>
 </head>
 <body>
 <h1>Home</h1>
 <a class="btn btn-primary" href="/order">Order now</a>
 <div class="container" id="table">
-
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"></th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        </tbody>
+    </table>
+    <% if(typeof alert != 'undefined') { %>
+    <% alert.forEach(function(error) { %>
+    <h1 class="alert">
+        <%= error %>
+    </h1>
+    <% }) %>
+    <% } %>
 </div>
 </body>
+<script>
+    const socket = io();
+</script>

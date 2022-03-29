@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
+const http = require('http').Server(app);
+const socketIO = require('socket.io');
+const io = socketIO(http);
 
 const indexRouter = require("./src/routes/index");
 const orderRouter = require("./src/routes/order");
@@ -22,4 +25,14 @@ app.use('/notify', notifyRouter);
 app.use('/order', orderRouter);
 app.use('/', indexRouter);
 
-app.listen(3000, () => console.log('Server is running on localhost:3000/'));
+
+io.on('connection', socket => {
+    console.log("SocketIO: New user connected");
+    // io.emit("test", "ok c#");
+    socket.on('disconnect', function () {
+        console.log('A user disconnected');
+    })
+})
+
+// app.listen(3000, () => console.log('Server is running on localhost:3000/'));
+http.listen(3000, () => console.log('Server is running on localhost:3000/'));

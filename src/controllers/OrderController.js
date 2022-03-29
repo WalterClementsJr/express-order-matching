@@ -3,7 +3,10 @@ const {body, validationResult} = require("express-validator");
 
 // Handle create on POST
 orderCreatePost = [
-    // Validate fields
+    () => {
+        global.isIndexPage = false;
+    },
+// Validate fields
     body('stockName', 'Mã cổ phiếu không hợp lệ').trim().isLength({min: 2}).escape(),
     // Process request
     (req, res, next) => {
