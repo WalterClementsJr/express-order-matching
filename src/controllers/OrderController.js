@@ -6,7 +6,7 @@ orderCreatePost = [
     () => {
         global.isIndexPage = false;
     },
-// Validate fields
+    // Validate fields
     body('stockName', 'Mã cổ phiếu không hợp lệ').trim().isLength({min: 2}).escape(),
     // Process request
     (req, res, next) => {
@@ -23,10 +23,11 @@ orderCreatePost = [
                     soLuong: req.body.amount,
                 }
             );
-            console.log(order.toJSON());
             order.save().then(() => {
                 // Successful
                 res.render('order');
+            }).catch(err => {
+                console.log(err);
             });
         }
     }

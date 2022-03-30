@@ -5,9 +5,6 @@ const bodyParser = require("body-parser");
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-const mssql = require('mssql');
-const mssqlConfig = require('./src/configs/mssql.config');
-
 const IndexController = require('./src/controllers/IndexController');
 
 const indexRouter = require("./src/routes/index");

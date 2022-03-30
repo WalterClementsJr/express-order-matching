@@ -12,7 +12,6 @@ async function getDataFromDb() {
 
 function sendDataToSocket() {
     getDataFromDb().then(data => {
-        console.log(data.recordset);
         global.io.emit("receive_data", data.recordset);
     });
 }
