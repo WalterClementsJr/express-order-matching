@@ -1,7 +1,6 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Net;
 
 namespace SqlDependencyInjector
 {
@@ -26,7 +25,9 @@ namespace SqlDependencyInjector
         static DataTable getDataWithSqlDependency()
         {
             using (var connection = new SqlConnection(connectionString))
-            using (var cmd = new SqlCommand("SELECT idkhop, ngaykhop, soluongkhop, giakhop FROM dbo.LENHKHOP", connection))
+            using (var cmd = new SqlCommand(
+                "SELECT id, macp, giaM3, soluongM3, giaM2, soluongM2, giaM1, soluongM1, giakhop, soluongkhop, giaB1, soluongB1, giaB2, soluongB2, giaB3, soluongB3, tongKL FROM dbo.BANGGIA",
+                connection))
             {
                 var dt = new DataTable();
 
@@ -54,7 +55,8 @@ namespace SqlDependencyInjector
                 var dt = getDataWithSqlDependency();
                 Console.WriteLine("Data changed.");
 
-                _ = notifyServer();
+                 _ = notifyServer();
+
             }
             else
             {

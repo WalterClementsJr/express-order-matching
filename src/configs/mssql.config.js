@@ -1,7 +1,7 @@
-const DB_CONFIG = {
+const MSSQL_CONFIG = {
     user: "sa",
     password: "123",
-    database: "ChungKhoan",
+    database: "CHUNGKHOAN",
     server: 'localhost\\MSSQLSERVER',
     pool: {
         max: 10,
@@ -14,4 +14,4 @@ const DB_CONFIG = {
     }
 };
 
-module.exports = {DB_CONFIG: DB_CONFIG};
+module.exports = MSSQL_CONFIG;

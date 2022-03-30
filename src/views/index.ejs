@@ -7,46 +7,37 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/res/img/fav.ico">
     <link rel="stylesheet" type="text/css" href="/res/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/res/css/font-awesome.min.css">
-    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
     <title>Home</title>
 </head>
 <body>
 <h1>Home</h1>
 <a class="btn btn-primary" href="/order">Order now</a>
-<div class="container" id="table">
+<div class="container">
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col"></th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Mã CK</th>
+            <th scope="col">Giá mua 3</th>
+            <th scope="col">Số lượng 3</th>
+            <th scope="col">Giá mua 2</th>
+            <th scope="col">Số lượng 2</th>
+            <th scope="col">Giá mua 1</th>
+            <th scope="col">Số lượng 1</th>
+            <th scope="col">Giá khớp</th>
+            <th scope="col">Khối lượng khớp</th>
+            <th scope="col">Giá bán 1</th>
+            <th scope="col">Số lượng 1</th>
+            <th scope="col">Giá bán 2</th>
+            <th scope="col">Số lượng 2</th>
+            <th scope="col">Giá bán 3</th>
+            <th scope="col">Số lượng 3</th>
+            <th scope="col">Tổng khối lượng</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
+        <tbody id="tableBody">
         </tbody>
     </table>
-    <% if(typeof alert != 'undefined') { %>
-    <% alert.forEach(function(error) { %>
-    <h1 class="alert">
-        <%= error %>
-    </h1>
-    <% }) %>
-    <% } %>
 </div>
 </body>
-<script>
-    const socket = io();
-</script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/res/js/index.js"></script>

@@ -3,7 +3,6 @@ const router = express.Router();
 const OrderController = require("../controllers/OrderController");
 
 router.get('/', function (req, res) {
-    global.isIndexPage = false;
     res.render('order');
 });
 
