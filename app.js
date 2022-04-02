@@ -30,9 +30,7 @@ app.use('/', indexRouter);
 global.io = io;
 
 io.on('connection', socket => {
-    console.log("SocketIO: New user connected");
-
-    IndexController.sendDataToSocket();
+    IndexController.sendLiveIndexToSocket();
 });
 
 server.listen(3000, () =>
