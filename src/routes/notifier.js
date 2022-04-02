@@ -6,7 +6,7 @@ router.get('/', function (req, res) {
     // response to request
     res.sendStatus(200);
     // repopulate the table
-    IndexController.sendDataToSocket();
+    IndexController.sendLiveIndexToSocket();
 });
 
 module.exports = router;
