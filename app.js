@@ -11,11 +11,11 @@ const indexRouter = require("./src/routes/index");
 const orderRouter = require("./src/routes/order");
 const notifyRouter = require("./src/routes/notifier");
 
-// set view engine to ejs
+// view engine
 app.set('views', path.resolve(__dirname, "src", "views"));
 app.set('view engine', 'ejs');
 
-// set static resources path
+// static resources path
 app.use("/res", express.static(path.resolve(__dirname, "src", "public")));
 
 app.use(bodyParser.json());
@@ -30,6 +30,7 @@ app.use('/', indexRouter);
 global.io = io;
 
 io.on('connection', socket => {
+    console.log('New client connected');
     IndexController.sendLiveIndexToSocket();
 });
 
