@@ -55,8 +55,8 @@ namespace SqlDependencyInjector
                 var dt = getDataWithSqlDependency();
                 Console.WriteLine("Data changed.");
 
+                // send GET request to Node end point
                  _ = notifyServer();
-
             }
             else
             {
