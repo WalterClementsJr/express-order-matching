@@ -5,4 +5,4 @@
 - HTML, CSS (Bootstrap 5) for front-end
 - C# for SQL Dependency class
 - SQL Server as DBMS
-- Python (planning) to insert data automatically
+- Python to automate insert data to simulate the live index
