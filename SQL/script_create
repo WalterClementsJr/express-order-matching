@@ -1,0 +1,90 @@
+CREATE DATABASE [CHUNGKHOAN]
+GO
+USE [CHUNGKHOAN]
+GO
+CREATE TABLE [dbo].[BANGGIA](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[macp] [nchar](7) NOT NULL,
+	[giaM3] [float] NULL,
+	[soluongM3] [int] NULL,
+	[giaM2] [float] NULL,
+	[soluongM2] [int] NULL,
+	[giaM1] [float] NULL,
+	[soluongM1] [int] NULL,
+	[giaKhop] [float] NULL,
+	[soluongKhop] [int] NULL,
+	[giaB1] [float] NULL,
+	[soluongB1] [int] NULL,
+	[giaB2] [float] NULL,
+	[soluongB2] [int] NULL,
+	[giaB3] [float] NULL,
+	[soluongB3] [int] NULL,
+	[tongKL] [int] NOT NULL,
+ CONSTRAINT [PK_BANGGIA] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LENHDAT]    Script Date: 2022-04-29 20:36:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LENHDAT](
+	[ld_id] [int] IDENTITY(1,1) NOT NULL,
+	[macp] [nchar](7) NOT NULL,
+	[ngaydat] [datetime] NOT NULL,
+	[loaigd] [nchar](1) NOT NULL,
+	[loailenh] [nchar](10) NULL,
+	[soluong] [int] NOT NULL,
+	[giadat] [float] NOT NULL,
+	[trangthailenh] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_LENHDAT] PRIMARY KEY CLUSTERED 
+(
+	[ld_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LENHKHOP]    Script Date: 2022-04-29 20:36:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LENHKHOP](
+	[khop_id] [int] IDENTITY(1,1) NOT NULL,
+	[ngaykhop] [datetime] NOT NULL,
+	[soluongkhop] [int] NOT NULL,
+	[giakhop] [float] NOT NULL,
+	[lenhdat_id] [int] NOT NULL,
+ CONSTRAINT [PK_LENHKHOP] PRIMARY KEY CLUSTERED 
+(
+	[khop_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[LENHDAT] ADD  CONSTRAINT [DF_LENHDAT_ngaydat]  DEFAULT (getdate()) FOR [ngaydat]
+GO
+ALTER TABLE [dbo].[LENHDAT] ADD  CONSTRAINT [DF_LENHDAT_loailenh]  DEFAULT ('LO') FOR [loailenh]
+GO
+ALTER TABLE [dbo].[LENHDAT] ADD  CONSTRAINT [DF_LENHDAT_trangthailenh]  DEFAULT ('CHO_KHOP') FOR [trangthailenh]
+GO
+ALTER TABLE [dbo].[LENHKHOP] ADD  CONSTRAINT [DF_LENHKHOP_ngaykhop]  DEFAULT (getdate()) FOR [ngaykhop]
+GO
+ALTER TABLE [dbo].[LENHKHOP]  WITH CHECK ADD  CONSTRAINT [FK_idlenhdat_id] FOREIGN KEY([lenhdat_id])
+REFERENCES [dbo].[LENHDAT] ([ld_id])
+GO
+ALTER TABLE [dbo].[LENHKHOP] CHECK CONSTRAINT [FK_idlenhdat_id]
+GO
+ALTER TABLE [dbo].[LENHDAT]  WITH CHECK ADD  CONSTRAINT [CK_loaigd] CHECK  (([loaigd]='B' OR [loaigd]='M'))
+GO
+ALTER TABLE [dbo].[LENHDAT] CHECK CONSTRAINT [CK_loaigd]
+GO
+ALTER TABLE [dbo].[LENHDAT]  WITH CHECK ADD  CONSTRAINT [CK_loailenh] CHECK  (([loailenh]='ATC' OR [loailenh]='ATO' OR [loailenh]='LO'))
+GO
+ALTER TABLE [dbo].[LENHDAT] CHECK CONSTRAINT [CK_loailenh]
+GO
+ALTER TABLE [dbo].[LENHDAT]  WITH CHECK ADD  CONSTRAINT [CK_trangthailenh] CHECK  (([trangthailenh]=N'CHUA_KHOP' OR [trangthailenh]=N'HUY' OR [trangthailenh]=N'KHOP_HET' OR [trangthailenh]=N'KHOP_1_P' OR [trangthailenh]=N'CHO_KHOP'))
+GO
+ALTER TABLE [dbo].[LENHDAT] CHECK CONSTRAINT [CK_trangthailenh]
+GO
